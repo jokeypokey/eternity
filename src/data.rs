@@ -1,4 +1,3 @@
-
 use std::collections::HashMap;
 
 #[derive(Copy, Clone)]
@@ -7,7 +6,7 @@ pub struct Tile {
     pub right: i8,
     pub bottom: i8,
     pub left: i8,
-    pub id: usize,
+    pub id: usize, // We are 0 indexing these. The puzzle itself will 1 index these. Beware.
 }
 
 
@@ -17,6 +16,7 @@ pub struct OrientedTile {
     pub orientation: u8, // clockwise: 0 = normal, 1 = 90 degrees , 2 = 180 degrees, 3 = 270 degrees
 }
 
+pub const IS_USING_HINTS: bool = false;
 
 impl OrientedTile {
     // Easily get the top, right, bottom, left sides of a tile given its rotation
@@ -77,10 +77,48 @@ pub struct MegaTile {
     // A mega tile is a 2x2 grid of tiles
     // ┌1 2┐
     // └3 4┘
-    pub tile1: OrientedTile,
-    pub tile2: OrientedTile,
-    pub tile3: OrientedTile,
-    pub tile4: OrientedTile,
+    pub tiles: [OrientedTile; 4]
+}
+
+impl MegaTile {
+    pub fn top(&self) -> (i8, i8) { (self.tiles[0].top(), self.tiles[1].top()) }
+    pub fn right(&self) -> (i8, i8) { (self.tiles[1].right(), self.tiles[3].right()) }
+    pub fn bottom(&self) -> (i8, i8) { (self.tiles[3].bottom(), self.tiles[2].bottom()) }
+    pub fn left(&self) -> (i8, i8) { (self.tiles[2].left(), self.tiles[0].left()) }
+}
+
+
+pub fn create_filled_grid(tileset: &[Tile], grid_size: usize) -> Vec<Vec<Option<OrientedTile>>> {
+    let mut grid= vec![vec![None; grid_size]; grid_size];
+
+    // Corners
+    grid[0][0] = Some(OrientedTile::new(0, tileset, 1));
+    grid[0][15] = Some(OrientedTile::new(1, tileset, 2));
+    grid[15][0] = Some(OrientedTile::new(2, tileset, 0));
+    grid[15][15] = Some(OrientedTile::new(3, tileset, 3));
+
+    // Edges
+    for i in 1..15 {  // Fill the top edge. Use tiles 4 to 17
+        grid [0][i] = Some(OrientedTile::new(4 + i - 1, tileset, 1));
+    }
+    for i in 1..15 {  // Fill the bottom edge. Use tiles 18 to 31
+        grid [grid_size-1][i] = Some(OrientedTile::new(18 + i - 1, tileset, 3));
+    }
+    for i in 1..15 { // Fill the left edge. Use tiles 32 to 45
+        grid [i][0] = Some(OrientedTile::new(32 + i - 1, tileset, 0));
+    }
+    for i in 1..15 { // Fill the right edge. Use tiles 46 to 59
+        grid [i][grid_size-1] = Some(OrientedTile::new(46 + i - 1, tileset, 2));
+    }
+
+    // Center
+    for i in 1..15 {
+        for j in 1..15 {
+            grid [i][j] = Some(OrientedTile::new(60 + (i - 1) * 14 + j - 1, tileset, 0));
+        }
+    }
+
+    grid
 }
 
 // Old non-generic version
@@ -335,7 +373,7 @@ pub const TILE_SET: [Tile; 256] = [
     Tile {top: 6, right: 20, bottom: 19, left: 18, id: 135},
     Tile {top: 13, right: 13, bottom: 18, left: 9, id: 136},
     Tile {top: 13, right: 7, bottom: 7, left: 21, id: 137},
-    Tile {top: 13, right: 7, bottom: 7, left: 8, id: 138},
+    Tile {top: 13, right: 7, bottom: 7, left: 8, id: 138},// starter
     Tile {top: 13, right: 7, bottom: 7, left: 17, id: 139},
     Tile {top: 13, right: 7, bottom: 15, left: 12, id: 140},
     Tile {top: 13, right: 7, bottom: 10, left: 7, id: 141},
@@ -377,7 +415,7 @@ pub const TILE_SET: [Tile; 256] = [
     Tile {top: 7, right: 11, bottom: 17, left: 19, id: 177},
     Tile {top: 7, right: 11, bottom: 11, left: 10, id: 178},
     Tile {top: 7, right: 19, bottom: 9, left: 19, id: 179},
-    Tile {top: 7, right: 12, bottom: 8, left: 19, id: 180},
+    Tile {top: 7, right: 12, bottom: 8, left: 19, id: 180}, // hint 3
     Tile {top: 7, right: 12, bottom: 9, left: 8, id: 181},
     Tile {top: 14, right: 14, bottom: 15, left: 11, id: 182},
     Tile {top: 14, right: 21, bottom: 20, left: 9, id: 183},
@@ -404,7 +442,7 @@ pub const TILE_SET: [Tile; 256] = [
     Tile {top: 14, right: 12, bottom: 19, left: 21, id: 204},
     Tile {top: 14, right: 12, bottom: 20, left: 12, id: 205},
     Tile {top: 21, right: 21, bottom: 20, left: 9, id: 206},
-    Tile {top: 21, right: 8, bottom: 15, left: 20, id: 207},
+    Tile {top: 21, right: 8, bottom: 15, left: 20, id: 207}, // Hint 1
     Tile {top: 21, right: 8, bottom: 11, left: 10, id: 208},
     Tile {top: 21, right: 9, bottom: 8, left: 15, id: 209},
     Tile {top: 21, right: 9, bottom: 19, left: 10, id: 210},
@@ -445,13 +483,13 @@ pub const TILE_SET: [Tile; 256] = [
     Tile {top: 9, right: 12, bottom: 19, left: 20, id: 245},
     Tile {top: 10, right: 10, bottom: 12, left: 20, id: 246},
     Tile {top: 10, right: 16, bottom: 17, left: 16, id: 247},
-    Tile {top: 10, right: 17, bottom: 16, left: 12, id: 248},
+    Tile {top: 10, right: 17, bottom: 16, left: 12, id: 248}, // hint 4
     Tile {top: 10, right: 18, bottom: 19, left: 12, id: 249},
     Tile {top: 16, right: 16, bottom: 20, left: 11, id: 250},
     Tile {top: 16, right: 17, bottom: 11, left: 17, id: 251},
     Tile {top: 17, right: 11, bottom: 19, left: 18, id: 252},
     Tile {top: 18, right: 19, bottom: 12, left: 19, id: 253},
-    Tile {top: 18, right: 20, bottom: 19, left: 20, id: 254},
+    Tile {top: 18, right: 20, bottom: 19, left: 20, id: 254}, // hint 2
     Tile {top: 11, right: 20, bottom: 12, left: 20, id: 255},
 ];
 

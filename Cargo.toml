@@ -9,3 +9,9 @@ edition = "2021"
 csv = "1.2.1"
 colored = "2.0.0"
 rand = "0.8.5"
+
+[profile.dev]
+opt-level = 3
+
+[profile.release]
+opt-level = 3

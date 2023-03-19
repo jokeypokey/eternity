@@ -1,0 +1,245 @@
+┌I─F┐
+H N F
+|H H|
+S F N
+└N─F┘
+┌F─F┐
+F O N
+|J O|
+N I N
+└I─F┘
+┌N─N┐
+F N U
+|U F|
+N L N
+└F─F┘
+┌N─F┐
+S T J
+|H V|
+H V J
+└N─F┘
+┌J─J┐
+U V I
+|V P|
+N N F
+└R─R┘
+┌F─N┐
+R R H
+|L T|
+R R S
+└F─F┘
+┌S─H┐
+I K N
+|F H|
+M S U
+└F─F┘
+┌N─F┐
+M H U
+|P M|
+P P N
+└S─H┘
+┌S─H┐
+P K K
+|U K|
+M V R
+└U─N┘
+┌U─N┐
+I T J
+|G U|
+M T J
+└P─M┘
+┌F─N┐
+K P F
+|P K|
+R O F
+└M─P┘
+┌J─J┐
+I O V
+|Q P|
+F N Q
+└N─U┘
+┌N─F┐
+U V I
+|N L|
+N S F
+└J─U┘
+┌Q─V┐
+I P M
+|L G|
+F I I
+└R─R┘
+┌R─R┐
+M L S
+|O I|
+M M H
+└U─J┘
+┌H─S┐
+M P M
+|P K|
+P M P
+└H─S┘
+┌F─I┐
+M U T
+|U V|
+I O Q
+└S─H┘
+┌F─I┐
+M L S
+|Q T|
+P J H
+└Q─T┘
+┌H─S┐
+M S O
+|G S|
+I H O
+└T─Q┘
+┌M─I┐
+O O P
+|J R|
+O O M
+└M─I┘
+┌M─J┐
+M N I
+|H P|
+M Q F
+└J─U┘
+┌M─P┐
+T L Q
+|O F|
+K R V
+└U─J┘
+┌M─M┐
+K U V
+|K R|
+T V Q
+└J─U┘
+┌M─P┐
+T K Q
+|S R|
+K L T
+└J─H┘
+┌M─M┐
+M V I
+|U Q|
+J I F
+└S─Q┘
+┌J─M┐
+H Q P
+|L L|
+S G M
+└T─K┘
+┌T─K┐
+Q P I
+|R J|
+S L M
+└T─P┘
+┌J─U┐
+S Q S
+|U J|
+Q S Q
+└J─U┘
+┌T─K┐
+S H R
+|J S|
+H S K
+└T─G┘
+┌M─J┐
+H J N
+|I Q|
+K N U
+└U─J┘
+┌T─K┐
+R G L
+|G U|
+K N Q
+└Q─T┘
+┌Q─S┐
+T V P
+|G G|
+K O M
+└R─R┘
+┌M─I┐
+T F K
+|J Q|
+P T R
+└Q─V┘
+┌Q─V┐
+H K V
+|G O|
+K H Q
+└Q─L┘
+┌Q─V┐
+V L Q
+|L L|
+Q L V
+└V─Q┘
+┌U─N┐
+G H S
+|G L|
+S U Q
+└T─Q┘
+┌R─R┐
+Q L U
+|R G|
+V V U
+└S─Q┘
+┌U─U┐
+M L M
+|U U|
+M L M
+└U─U┘
+┌H─J┐
+P I R
+|N R|
+M L M
+└M─I┘
+┌H─J┐
+R O T
+|F P|
+T S K
+└Q─V┘
+┌K─R┐
+R G K
+|G G|
+K G R
+└R─K┘
+┌H─J┐
+P R K
+|J K|
+M O R
+└P─G┘
+┌P─T┐
+T G P
+|G G|
+P G T
+└T─P┘
+┌K─N┐
+K S T
+|O O|
+T S K
+└N─K┘
+┌N─N┐
+Q O V
+|V V|
+V O Q
+└N─N┘
+┌I─L┐
+V P G
+|U H|
+O G P
+└Q─L┘
+┌T─T┐
+U U U
+|S S|
+U U U
+└T─T┘
+┌H─T┐
+T M V
+|I O|
+K I Q
+└T─G┘
+┌Q─V┐
+R M F
+|K M|
+M R U
+└Q─O┘

@@ -1,0 +1,2 @@
+
+cd C:\dev\eternity\target\release; ./eternity.exe
